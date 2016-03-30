@@ -1,0 +1,100 @@
+{% extends "app_base.html" %}
+{% block content %}
+
+<head>
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    vertical-align: middle;
+}
+th {
+	padding: 5px;
+    text-align: left;
+}
+label {
+	font-size: 18px;
+	width: 14%;
+    display: inline-block;
+}​
+tr:hover {background-color: #f5f5f5}
+</style>
+</head>
+
+<h3 style="font-size:40px; font-family:Arial;"> Make Picks </h3> 
+<form method="POST" action="pick" style="max-width:400px; width:100%">
+	{% if message is defined %}
+	<div class="alert alert-warning">{{ message }}</div>
+	{% endif %}
+	<div class="alert alert-info">All fields must be entered</div>
+
+	<div style="width:200%" class="form-group">
+	  <label style="font-size:20px" for="username">Username</label>
+	  <input style="width:50%" type="text" id="username" name="username" required/>
+	  <input type="checkbox" name="eligible"> Eligible for prize (e.g. over 18)<br>
+	</div>
+
+	{% if data is defined %}
+	<table border="1" style="width:300%">
+	{% for events in data %}
+	  <tr>
+	  <th width="15%">{{ events["Event"]|e }}</th>
+	    <th style="text-align:center" width="20%">
+	    	<label for={{ events["s_ID"] + "_first" }}>1st</label>
+	    	<select style="width:70%" size="1" name={{ events["s_ID"] + "_first" }} id={{ events["s_ID"] + "_first" }} required>
+				<option selected value={{ events["Competitors"][0][1]|e }}>{{ events["Competitors"][0][0]|e }}</option>
+				{% for number in range(events["Competitors"]|count) %}
+					{% if number != 0 %}
+					<option value={{ events["Competitors"][number][1]|e }}>{{ events["Competitors"][number][0]|e }}</option>
+					{% endif %}
+				{% endfor %}
+			</select>
+	    </th>
+	    <th style="text-align:center" width="20%">
+	    	<label for={{ events["s_ID"] + "_second" }}>2nd</label>
+	    	<select style="width:70%" size="1" name={{ events["s_ID"] + "_second" }} id={{ events["s_ID"] + "_second" }} required>
+				<option selected value={{ events["Competitors"][1][1]|e }}>{{ events["Competitors"][1][0]|e }}</option>
+				{% for number in range(events["Competitors"]|count) %}
+					{% if number != 1 %}
+					<option value={{ events["Competitors"][number][1]|e }}>{{ events["Competitors"][number][0]|e }}</option>
+					{% endif %}
+				{% endfor %}
+			</select>
+	    </th>
+	    <th style="text-align:center" width="20%">
+	    	<label for={{ events["s_ID"] + "_third" }}>3rd</label>
+	    	<select style="width:70%" size="1" name={{ events["s_ID"] + "_third" }} id={{ events["s_ID"] + "_third" }} required>
+				<option selected value={{ events["Competitors"][2][1]|e }}>{{ events["Competitors"][2][0]|e }}</option>
+				{% for number in range(events["Competitors"]|count) %}
+					{% if number != 2 %}
+					<option value={{ events["Competitors"][number][1]|e }}>{{ events["Competitors"][number][0]|e }}</option>
+					{% endif %}
+				{% endfor %}
+			</select>
+	    </th>
+	    <th style="text-align:center" width="20%">
+	    	<label for={{ events["s_ID"] + "_fourth" }}>4th</label>
+	    	<select style="width:70%" size="1" name={{ events["s_ID"] + "_fourth" }} id={{ events["s_ID"] + "_fourth" }} required>
+				<option selected value={{ events["Competitors"][3][1]|e }}>{{ events["Competitors"][3][0]|e }}</option>
+				{% for number in range(events["Competitors"]|count) %}
+					{% if number != 3 %}
+					<option value={{ events["Competitors"][number][1]|e }}>{{ events["Competitors"][number][0]|e }}</option>
+					{% endif %}
+				{% endfor %}
+			</select>
+	    </th>	    
+	  </tr>
+	  {% endfor %}
+	</table>
+	{% endif %}
+
+	<br></br>
+
+	<div class="form-group">
+	<input type="submit" value="Make Picks" class="btn btn-primary"/>
+	</div>
+</form>
+</center>
+{% endblock %}

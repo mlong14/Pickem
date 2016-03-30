@@ -1,0 +1,59 @@
+{% extends "app_base.html" %}
+{% block content %}
+
+<h3>Auction Viewer</h3>
+{% if message is defined %}
+	<div class="alert alert-warning" role="alert">{{ message }}</div>
+{% endif %}
+
+<ul>
+{% if item_result is defined %}
+<h4>Auction</h4>
+	<ul>
+	{% for key in item_result %}
+		<div>
+			<span>{{ key|e }}</span>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<span>{{ item_result[key]|e }}</span>
+		</div>
+	{% endfor %}
+	<div>--------</div>
+	</ul>
+{% endif %}
+
+{% if item_result is defined %}
+<h4>Bids</h4>
+	<ul>
+	{% if bids is defined %}
+		{% for bid in bids %}
+			{% for key in bid %}
+				<div>
+					<span>{{ key|e }}</span>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<span>{{ bid[key]|e }}</span>
+				</div>
+			{% endfor %}
+			<div>--------</div>
+		{% endfor %}
+	{% else %}
+	<div>No results</div>
+	{% endif %}
+	</ul>
+{% endif %}
+
+{% if status_res is defined %}
+<h4>Status</h4>
+	<ul>
+		{% for key in status_res %}
+			<div>
+				<span>{{ key|e }}</span>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<span>{{ status_res[key]|e }}</span>
+			</div>
+		{% endfor %}
+	</ul>
+{% endif %} 
+</ul>
+
+
+{% endblock %}

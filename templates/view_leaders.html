@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+{% extends "app_base.html" %}
+{% block content %}
+<html>
+
+<head>
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+}
+th {
+    text-align: left;
+}
+label {
+	font-size: 18px;
+	width: 14%;
+    display: inline-block;
+}​
+tr:hover {background-color: #f5f5f5}
+</style>
+</head>
+
+  <h3 style="font-size:40px; font-family:Arial;"> Leaderboard </h3> 
+	{% if message is defined %}
+	<div class="alert alert-warning" role="alert">{{ message }}</div>
+	{% endif %}
+
+<ul>
+{% if leader_data %}
+
+	<table style="width:40%">
+	  <tr>
+	  	<th style="width:15%">Place</th>
+	  	<th style="width:70%">Username</th>
+	    <th style="width:15%">Score</th>
+	  </tr>
+	</table>
+
+{% for result in leader_data %}
+	<table border="1" style="width:40%">
+	  <tr>
+	  	<td style="width:15%">{{ result[0]|e }}</td>
+	  	<td style="width:70%">{{ result[1]|e }}</td>
+	    <td style="width:15%">{{ result[2]|e }}</td>
+	  </tr>
+	</table>
+{% endfor %}
+{% endif %}
+</ul>
+
+{% endblock %}

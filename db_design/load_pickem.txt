@@ -1,0 +1,26 @@
+
+
+delete from Results;
+delete from Picks;
+delete from Users;
+delete from Contestants;
+delete from Events;
+delete from Entries;
+
+.separator |
+
+.import results.dat Results
+
+.import picks.dat Picks
+update Picks set First = null where First = 'NULL';
+update Picks set Second = null where Second = 'NULL';
+update Picks set Third = null where Third = 'NULL';
+update Picks set Fourth = null where Fourth = 'NULL';
+
+.import users.dat Users
+
+.import contestants.dat Contestants
+
+.import events.dat Events
+
+.import entries.dat Entries

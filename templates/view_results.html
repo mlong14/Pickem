@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% extends "app_base.html" %}
+{% block content %}
+<html>
+
+<head>
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+}
+th {
+    text-align: left;
+}
+label {
+	font-size: 18px;
+	width: 14%;
+    display: inline-block;
+}​
+tr:hover {background-color: #f5f5f5}
+</style>
+</head>
+
+  <h3 style="font-size:40px; font-family:Arial;"> Results </h3> 
+	{% if message is defined %}
+	<div class="alert alert-warning" role="alert">{{ message }}</div>
+	{% endif %}
+
+<ul>
+{% if results %}
+	<table border="1" style="width:70%">
+	  <tr>
+	  	<th width="20%">Event</th>
+	    <th width="20%">1st</th>
+	    <th width="20%">2nd</th> 
+	    <th width="20%">3rd</th>
+	    <th width="20%">4th</th>
+	  </tr>
+	</table>
+
+	{% for r in results %}
+	<table border="1" style="width:70%">
+	  <tr>
+	  	<td width="20%">{{ r["Event"]|e }}</td>
+	    <td width="20%">{{ r["First"]|e }}</td>
+	    <td width="20%">{{ r["Second"]|e }}</td> 
+	    <td width="20%">{{ r["Third"]|e }}</td>
+	    <td width="20%">{{ r["Fourth"]|e }}</td>
+	  </tr>
+	</table>
+{% endfor %}
+{% endif %}
+</ul>
+
+{% endblock %}
